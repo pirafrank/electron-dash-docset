@@ -9,7 +9,7 @@
 	<key>DocSetPlatformFamily</key>
 	<string>electron</string>
     <key>dashIndexFilePath</key>
-    <string>phobos/index.html</string>
+    <string>docs/v0.31.0/index.html</string>
 	<key>isDashDocset</key>
 	<true/>
     <key>isJavaScriptEnabled</key>
