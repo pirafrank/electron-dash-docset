@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-import sys
 import os
 import re
 import sqlite3
-from bs4 import BeautifulSoup  # , NavigableString, Tag
+from bs4 import BeautifulSoup
 
 
 db = sqlite3.connect('electron.docset/Contents/Resources/docSet.dsidx')
@@ -15,9 +14,9 @@ except: pass
 cur.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);')
 cur.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
 
-docpath = 'electron.docset/Contents/Resources/Documents/docs/v0.31.0'
+docpath = 'electron.docset/Contents/Resources/Documents/docs/version'
 subpath = 'docs/'
-version = sys.argv[1]
+version = 'version'
 docpath = 'electron.docset/Contents/Resources/Documents/'+subpath+version
 
 page = open(os.path.join(docpath, 'index.html')).read()
