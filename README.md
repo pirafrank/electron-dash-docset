@@ -1,12 +1,33 @@
 # Electron Dash docset
 
-A Dash docset for the [electron](http://electron.atom.io) documentation.
+A repository with all you need to generate a Dash docset for the [electron](http://electron.atom.io) documentation.
 
-## Generating
+### Requirements
+
+- Python 2.7.x (dunno if it works on Python 3)
+- Beautiful Soup 4.4.x
+- wget
+
+### Instructions
+
+Execute in order:
 
 ```sh
-bundle install
-rake download
-rake restyle
-rake gen
+./prepare.sh (doc version)
+./build.py
+./pack.sh
 ```
+
+Please note that 'doc version' has to match the version in the URL.
+
+Example:
+
+```sh
+./prepare.sh (version)
+./build.py
+./pack.sh
+```
+
+### License
+
+The software in this repository are released under the GNU GPLv3 License by Francesco Pira (dev[at]fpira[dot]com, fpira.com). You can read the terms of the license [here](http://www.gnu.org/licenses/gpl-3.0.html).
