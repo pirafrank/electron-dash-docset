@@ -35,7 +35,7 @@ if [[ $# != 1 ]]; then
     echo "Usage: ./prepare.sh <doc version>"
     echo "Example: ./prepare.sh v0.31.0"
     echo ""
-    echo "Check the version syntax matches the version in the URL the"
+    echo "Check that the version syntax matches the version in the URL"
     echo "For example: If doc URL is http://electron.atom.io/docs/v0.31.0, then doc version is v0.31.0"
     exit -1
 fi
@@ -54,3 +54,6 @@ sleep 1
 
 echo "copying downloaded files to docset..."
 cp -rf electron.atom.io/ electron.docset/Contents/Resources/Documents/
+
+echo "Cleaning up..."
+rm -rf electron.atom.io
