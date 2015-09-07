@@ -22,8 +22,10 @@ Please note that 'doc version' has to match the version in the URL.
 
 Example:
 
+The URL is ```http://electron.atom.io/docs/v0.31.0```
+
 ```sh
-./prepare.sh (version)
+./prepare.sh v0.31.0
 ./build.py
 ./pack.sh
 ```
