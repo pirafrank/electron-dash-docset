@@ -24,6 +24,12 @@
 #
 ########################################################################
 
+# dependencies
+if [[ ! $(which "wget") ]]; then
+    echo -e >&2 "\n$(tput setaf 1)This script requires wget. Please install it first.$(tput sgr0)\n"
+    exit 1
+fi
+
 # variables
 VERSION="$1"
 DOMAIN="electron.atom.io"
