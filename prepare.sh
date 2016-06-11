@@ -31,30 +31,14 @@ if [[ ! $(which "wget") ]]; then
 fi
 
 # variables
-VERSION="$1"
 DOMAIN="electron.atom.io"
-URL="http://electron.atom.io/docs/""$VERSION""/" # The trailing slash is extremely important!
-
-# checking passed arguments
-if [[ $# != 1 ]]; then
-    echo "Error: wrong number of arguments"
-    echo "Usage: ./prepare.sh <doc version>"
-    echo "Example: ./prepare.sh v0.31.0"
-    echo ""
-    echo "Check that the version syntax matches the version in the URL"
-    echo "For example: If doc URL is http://electron.atom.io/docs/v0.31.0, then doc version is v0.31.0"
-    exit -1
-fi
+URL="http://electron.atom.io/docs/" # The trailing slash is extremely important!
 
 echo "Creating docset dir..."
 mkdir -p electron.docset/Contents/Resources/Documents
 
 echo "Downloading documentation from electron.atom.io..."
 wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domain "$DOMAIN" --no-parent "$URL"
-
-sleep 1
-
-mv "electron.atom.io/docs/""$VERSION" electron.atom.io/docs/version
 
 sleep 1
 

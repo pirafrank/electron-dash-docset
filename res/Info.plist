@@ -9,7 +9,7 @@
 	<key>DocSetPlatformFamily</key>
 	<string>electron</string>
     <key>dashIndexFilePath</key>
-    <string>docs/version/index.html</string>
+    <string>docs/index.html</string>
 	<key>isDashDocset</key>
 	<true/>
     <key>isJavaScriptEnabled</key>
