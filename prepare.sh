@@ -6,6 +6,15 @@ if [[ ! $(which "wget") ]]; then
     exit 1
 fi
 
+# check if electron website is reachable
+echo "Checking internet connection..."
+wget --spider http://electron.atom.io > /dev/null 2>&1
+if [ "$?" != 0 ]; then
+    echo -e >&2 "$(tput setaf 1)Error: You're not online or electron.atom.io is down. Please check and try again.$(tput sgr0)\n"
+    exit 1
+fi
+echo "Connection is OK..."
+
 # variables
 DOMAIN="electron.atom.io"
 URL="http://electron.atom.io/docs/" # The trailing slash is extremely important!
