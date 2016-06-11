@@ -5,50 +5,70 @@ import re
 import sqlite3
 from bs4 import BeautifulSoup
 
+def build_tutorial_index(soup, cursor):
+    any = re.compile('tutorial')
+    for tag in soup.find_all('a', {'href': any}):
+        name = tag.text.strip()
 
-db = sqlite3.connect('electron.docset/Contents/Resources/docSet.dsidx')
-cur = db.cursor()
+        if len(name) > 0:
+            path = tag.attrs['href'].strip()
+            path = subpath+'/'+path
 
-try: cur.execute('DROP TABLE searchIndex;')
-except: pass
-cur.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);')
-cur.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
+            if path.split('#')[0] not in ('index.html'):
+                cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
+                print 'name: %s, path: %s' % (name, path)
 
-subpath = 'docs/'
-docpath = os.getcwd()+'/electron.docset/Contents/Resources/Documents/'+subpath
+def build_development_index(soup, cursor):
+    any = re.compile('development')
+    for tag in soup.find_all('a', {'href': any}):
+        name = tag.text.strip()
 
-page = open(os.path.join(docpath, 'index.html')).read()
-soup = BeautifulSoup(page, "html.parser")
+        if len(name) > 0:
+            path = tag.attrs['href'].strip()
+            path = subpath+'/'+path
 
-any = re.compile('tutorial')
-for tag in soup.find_all('a', {'href': any}):
-    name = tag.text.strip()
-    if len(name) > 0:
-        path = tag.attrs['href'].strip()
-        path = subpath+'/'+path
-        if path.split('#')[0] not in ('index.html'):
-            cur.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
-            print 'name: %s, path: %s' % (name, path)
+            if path.split('#')[0] not in ('index.html'):
+                cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
+                print 'name: %s, path: %s' % (name, path)
 
-any = re.compile('development')
-for tag in soup.find_all('a', {'href': any}):
-    name = tag.text.strip()
-    if len(name) > 0:
-        path = tag.attrs['href'].strip()
-        path = subpath+'/'+path
-        if path.split('#')[0] not in ('index.html'):
-            cur.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
-            print 'name: %s, path: %s' % (name, path)
+def build_api_index(soup, cursor):
+    any = re.compile('api')
+    for tag in soup.find_all('a', {'href': any}):
+        name = tag.text.strip()
 
-any = re.compile('api')
-for tag in soup.find_all('a', {'href': any}):
-    name = tag.text.strip()
-    if len(name) > 0:
-        path = tag.attrs['href'].strip()
-        path = subpath+'/'+path
-        if path.split('#')[0] not in ('index.html'):
-            cur.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Module', path))
-            print 'name: %s, path: %s' % (name, path)
+        if len(name) > 0:
+            path = tag.attrs['href'].strip()
+            path = subpath+'/'+path
 
-db.commit()
-db.close()
+            if path.split('#')[0] not in ('index.html'):
+                cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Module', path))
+                print 'name: %s, path: %s' % (name, path)
+
+if __name__ == '__main__':
+    # Set up sqlite db
+    db = sqlite3.connect('electron.docset/Contents/Resources/docSet.dsidx')
+    cursor = db.cursor()
+
+    # Drop search table if it already exists
+    try:
+        cursor.execute('DROP TABLE searchIndex;')
+    except:
+        pass
+
+    # Create search table
+    cursor.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);')
+    cursor.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
+
+    subpath = 'docs/'
+    docpath = os.getcwd()+'/electron.docset/Contents/Resources/Documents/'+subpath
+
+    page = open(os.path.join(docpath, 'index.html')).read()
+    soup = BeautifulSoup(page, "html.parser")
+
+    build_tutorial_index(soup, cursor)
+    build_development_index(soup, cursor)
+    build_api_index(soup, cursor)
+
+    # Make db changes permanent
+    db.commit()
+    db.close()

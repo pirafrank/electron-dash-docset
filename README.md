@@ -4,35 +4,28 @@ A repository with all you need to generate a Dash docset for the [electron](http
 
 ## Requirements
 
-- Python 2.7.x (don't if it works on Python 3)
-- Beautiful Soup 4.4.x
+- Python 2.7.x
 - wget
 
-## Instructions
+## Installation
+
+1. Fork this repo
+2. `cd` into it
+3. Install pip dependencies running `pip install -r requirements.txt`
+
+## How to use
 
 #### Building
 
 Execute in order:
 
 ```sh
-./prepare.sh <doc version>
+./prepare.sh
 ./build.py
 ./pack.sh
 ```
 
-Please note that 'doc version' has to match the version in the URL.
-
-**Example**
-
-The doc URL is ```http://electron.atom.io/docs/v0.31.0```
-
-Then:
-
-```sh
-./prepare.sh v0.31.0
-./build.py
-./pack.sh
-```
+Since electron maintainers removed older doc versions from the website, you'll get the latest doc available.
 
 #### Cleaning up
 
@@ -41,6 +34,10 @@ After you've generated the docset and copied it where you need to, run the clean
 ```sh
 ./clean.sh
 ```
+
+## Credits
+
+Thanks to Bhargav Nookala (nooknb[at]gmail[dot]com) for is input to [tidy up some things](https://github.com/bnookala/electron-dash-docset/commit/6c1ba6b95ca3d04010ea4db46451113c397c88c3).
 
 ## License
 
