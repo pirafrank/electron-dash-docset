@@ -19,6 +19,9 @@ echo "Connection is OK..."
 DOMAIN="electron.atom.io"
 URL="http://electron.atom.io/docs/" # The trailing slash is extremely important!
 
+echo "Cleaning up old files..."
+./clean.sh > /dev/null 2>&1
+
 echo "Creating docset dir..."
 mkdir -p electron.docset/Contents/Resources/Documents
 
@@ -28,7 +31,7 @@ wget --recursive --no-clobber --page-requisites --html-extension --convert-links
 sleep 1
 
 echo "copying downloaded files to docset..."
-cp -rf electron.atom.io/ electron.docset/Contents/Resources/Documents/
+mv -f electron.atom.io/* electron.docset/Contents/Resources/Documents/
 
 echo "Cleaning up..."
 rm -rf electron.atom.io

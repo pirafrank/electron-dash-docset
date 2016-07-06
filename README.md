@@ -35,6 +35,8 @@ After you've generated the docset and copied it where you need to, run the clean
 ./clean.sh
 ```
 
+Don't worry if you forget to clean before preparing another docset, the `prepare.sh` script will do it for you.
+
 ## Credits
 
 Thanks to Bhargav Nookala (nooknb[at]gmail[dot]com) for is input to [tidy up some things](https://github.com/bnookala/electron-dash-docset/commit/6c1ba6b95ca3d04010ea4db46451113c397c88c3).
