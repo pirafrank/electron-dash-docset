@@ -23,7 +23,7 @@ echo "Cleaning up old files..."
 ./clean.sh > /dev/null 2>&1
 
 echo "Creating docset dir..."
-mkdir -p electron.docset/Contents/Resources/Documents
+mkdir -p output/electron.docset/Contents/Resources/Documents
 
 echo "Downloading documentation from electron.atom.io..."
 wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domain "$DOMAIN" --no-parent "$URL"
@@ -31,7 +31,7 @@ wget --recursive --no-clobber --page-requisites --html-extension --convert-links
 sleep 1
 
 echo "copying downloaded files to docset..."
-mv -f electron.atom.io/* electron.docset/Contents/Resources/Documents/
+mv -f electron.atom.io/* output/electron.docset/Contents/Resources/Documents/
 
 echo "Cleaning up..."
 rm -rf electron.atom.io

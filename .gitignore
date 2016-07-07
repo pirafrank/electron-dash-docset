@@ -1,6 +1,13 @@
+# OS rubbish
 .DS_Store
+.Thumbs_db
+
+# legacy files
 electron.docset
 index.sql
 electron.tgz
 electron.docset.zip
+
+# current
 electron.atom.io
+output
