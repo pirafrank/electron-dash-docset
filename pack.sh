@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# get dir where the script lives and dive in
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
+cd "$SCRIPTPATH"
+
 echo "copying resources into electron.docset ..."
 cp res/icon* output/electron.docset/
 cp res/Info.plist output/electron.docset/Contents/

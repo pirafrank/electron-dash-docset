@@ -8,6 +8,7 @@ Instead, if you want to make yours by hand keep on reading.
 
 ## Requirements
 
+- OS X or Linux with bash
 - Python 2.7.x
 - wget
 - A pushbullet account (optional, only for Auto Mode, read below)
@@ -65,7 +66,7 @@ The script will:
 - run all the scripts and create the updated version of the docset
 - let you know once it's done.
 
-It's best to set it up in crontab. Example: `0 8 * * * python2 /path/to/this/repo/update_checker.py`
+It's best to set it up in crontab on some VPS.
 
 FYI:
 
@@ -77,8 +78,16 @@ FYI:
 1. create an API token from your Pushbullet account from [here](https://www.pushbullet.com/#settings/account) and copy it
 2. clone this repo and `cd` to this repo dir
 3. `echo "your_token_here" > userdata/pushbullet_api_token.txt`
-4. setup `crontab` (something like in the example above)
+4. run `crontab -e` and enter something like `0 */12 * * * python2 /path/to/this/repo/update_checker.py` This will run the script twice a day
 5. Done! No more need to edit files in `userdata` dir.
+
+#### Logging
+
+Logs are saved in `~/.config/electron-dash-docset/` (only in Auto Mode).
+
+## Uninstall
+
+Simply delete the repo folder. This has been designed so no files (config or downloaded) go outside the repo root.
 
 ## Contributions
 
