@@ -19,10 +19,15 @@ echo "Connection is OK..."
 DOMAIN="electron.atom.io"
 URL="http://electron.atom.io/docs/" # The trailing slash is extremely important!
 
+# get dir where the script lives and dive in
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
+cd "$SCRIPTPATH"
+
 echo "Cleaning up old files..."
 ./clean.sh > /dev/null 2>&1
 
 echo "Getting current doc version number..."
+mkdir -p output
 curl -s http://electron.atom.io/docs/index.html | grep -o 'docs-version.*' | cut -d ">" -f2 | cut -d "<" -f1 > "output/CURRENT_VERSION"
 
 echo "Creating docset dir..."

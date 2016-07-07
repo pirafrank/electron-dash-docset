@@ -45,8 +45,11 @@ def build_api_index(soup, cursor):
                 print 'name: %s, path: %s' % (name, path)
 
 if __name__ == '__main__':
+    # getting the folder where the script lives
+    abs_work_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+
     # Set up sqlite db
-    db = sqlite3.connect('output/electron.docset/Contents/Resources/docSet.dsidx')
+    db = sqlite3.connect(abs_work_path+'output/electron.docset/Contents/Resources/docSet.dsidx')
     cursor = db.cursor()
 
     # Drop search table if it already exists
@@ -60,7 +63,7 @@ if __name__ == '__main__':
     cursor.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
 
     subpath = 'docs/'
-    docpath = os.getcwd()+'/output/electron.docset/Contents/Resources/Documents/'+subpath
+    docpath = abs_work_path+'/output/electron.docset/Contents/Resources/Documents/'+subpath
 
     page = open(os.path.join(docpath, 'index.html')).read()
     soup = BeautifulSoup(page, "html.parser")
