@@ -1,6 +1,15 @@
+# OS rubbish
 .DS_Store
+.Thumbs_db
+
+# legacy files
 electron.docset
 index.sql
 electron.tgz
 electron.docset.zip
+
+# current
 electron.atom.io
+output
+userdata/electron_vers_last_run.txt
+userdata/pushbullet_api_token.txt
