@@ -22,6 +22,9 @@ URL="http://electron.atom.io/docs/" # The trailing slash is extremely important!
 echo "Cleaning up old files..."
 ./clean.sh > /dev/null 2>&1
 
+echo "Getting current doc version number..."
+curl -s http://electron.atom.io/docs/index.html | grep -o 'docs-version.*' | cut -d ">" -f2 | cut -d "<" -f1 > "output/CURRENT_VERSION"
+
 echo "Creating docset dir..."
 mkdir -p output/electron.docset/Contents/Resources/Documents
 

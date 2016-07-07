@@ -43,6 +43,7 @@ After you've generated the docset and copied it where you need to, run the clean
 ./clean.sh
 ```
 
+- You can leave compressed files in their folders inside the output dir. They won't be overwritten by future script runs.
 - Don't worry if you forget to clean before preparing another docset, the `prepare.sh` script will do it for you.
 - Cleaning up is not done by default so you can keep the uncompressed docset file. That's useful to test it in Dash right after running the script.
 
