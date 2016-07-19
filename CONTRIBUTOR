@@ -1,7 +1,7 @@
 ################################################################################
 # electron-dash-docset <https://github.com/pirafrank/electron-dash-docset>
-# Notifies the user when plug or unplug the power cord to extend
-# the overall battery life
+# A repository to generate a Dash docset for the electron (electron.atom.io)
+# documentation.
 #
 # Copyright (C) 2015 Francesco Pira <dev[at]fpira[dot]com>
 #
