@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import re
 import sqlite3
 from bs4 import BeautifulSoup
@@ -49,7 +50,7 @@ if __name__ == '__main__':
     abs_work_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
     # Set up sqlite db
-    db = sqlite3.connect(abs_work_path+'output/electron.docset/Contents/Resources/docSet.dsidx')
+    db = sqlite3.connect(os.path.join(abs_work_path,'output/electron.docset/Contents/Resources/docSet.dsidx'))
     cursor = db.cursor()
 
     # Drop search table if it already exists
