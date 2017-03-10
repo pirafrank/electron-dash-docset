@@ -71,7 +71,7 @@ It's best to set it up in crontab on some VPS.
 FYI:
 
 - Auto Mode requires you to have a Pushbullet account and their app installed at least on one device (e.g. your smartphone). No worries, it's free!
-- Notification will be sent to all your devices (so you don't have to remember to change the device_id in case you change device)
+- Notifications will be sent to all your devices (so you don't have to remember to change the device_id in case you change device)
 
 #### Setup
 
