@@ -8,16 +8,16 @@ fi
 
 # check if electron website is reachable
 echo "Checking internet connection..."
-wget --spider https://electron.atom.io > /dev/null 2>&1
+wget --spider https://electronjs.org > /dev/null 2>&1
 if [ "$?" != 0 ]; then
-    echo -e >&2 "$(tput setaf 1)Error: You're not online or electron.atom.io is down. Please check and try again.$(tput sgr0)\n"
+    echo -e >&2 "$(tput setaf 1)Error: You're not online or electronjs.org is down. Please check and try again.$(tput sgr0)\n"
     exit 1
 fi
 echo "Connection is OK..."
 
 # variables
-DOMAIN="electron.atom.io"
-URL="https://electron.atom.io/docs/" # The trailing slash is extremely important!
+DOMAIN="electronjs.org"
+URL="https://electronjs.org/docs" # The trailing slash is extremely important!
 
 # get dir where the script lives and dive in
 SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
@@ -28,18 +28,23 @@ echo "Cleaning up old files..."
 
 echo "Getting current doc version number..."
 mkdir -p output
-curl -s https://electron.atom.io/docs/index.html | grep -o 'docs-version.*' | cut -d ">" -f2 | cut -d "<" -f1 > "output/CURRENT_VERSION"
+curl -s https://electronjs.org/docs | grep -o 'docs-version.*' | cut -d ">" -f2 | cut -d "<" -f1 > "output/CURRENT_VERSION"
 
 echo "Creating docset dir..."
 mkdir -p output/electron.docset/Contents/Resources/Documents
 
-echo "Downloading documentation from electron.atom.io..."
+echo "Downloading documentation from electronjs.org..."
 wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domain "$DOMAIN" --no-parent "$URL"
 
 sleep 1
 
+rm -rf electronjs.org/app*
+rm -rf electronjs.org/node_modules
+rm -rf electronjs.org/package.json
+
 echo "copying downloaded files to docset..."
-mv -f electron.atom.io/* output/electron.docset/Contents/Resources/Documents/
+#mv -f electronjs.org/* output/electron.docset/Contents/Resources/Documents/
+cp -r electronjs.org/* output/electron.docset/Contents/Resources/Documents/
 
 echo "Cleaning up..."
-rm -rf electron.atom.io
+rm -rf electronjs.org
