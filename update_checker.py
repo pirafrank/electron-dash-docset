@@ -75,7 +75,7 @@ def notify(message):
     r = requests.post(url, data=json.dumps(data), headers=headers)
 
 if __name__ == '__main__':
-    current_electron_version = get_current_electron_version("http://electron.atom.io/docs/index.html")
+    current_electron_version = get_current_electron_version("https://electronjs.org/docs")
     print "Current electron doc version is: "+current_electron_version
 
     abs_work_path = os.path.abspath(os.path.dirname(sys.argv[0]))
