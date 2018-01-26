@@ -34,13 +34,15 @@ echo "Creating docset dir..."
 mkdir -p output/electron.docset/Contents/Resources/Documents
 
 echo "Downloading documentation from electronjs.org..."
-wget --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domain "$DOMAIN" --no-parent "$URL"
+wget --header='Accept-Language: en-US' --recursive --no-clobber --page-requisites --html-extension --convert-links --restrict-file-names=windows --domain "$DOMAIN" --no-parent "$URL"
+#wget --header='Accept-Language: en-US' "$URL" -O electronjs.org/docs.html
 
 sleep 1
 
 rm -rf electronjs.org/app*
 rm -rf electronjs.org/node_modules
 rm -rf electronjs.org/package.json
+rm -rf electronjs.org/blog
 
 echo "copying downloaded files to docset..."
 #mv -f electronjs.org/* output/electron.docset/Contents/Resources/Documents/
