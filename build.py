@@ -13,7 +13,9 @@ def build_tutorial_index(soup, cursor):
 
         if len(name) > 0:
             path = tag.attrs['href'].strip()
-            path = subpath+'/'+path
+            if "://" in path:
+                return
+            path = subpath+path
 
             if path.split('#')[0] not in ('index.html'):
                 cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
@@ -26,7 +28,9 @@ def build_development_index(soup, cursor):
 
         if len(name) > 0:
             path = tag.attrs['href'].strip()
-            path = subpath+'/'+path
+            if "://" in path:
+                return
+            path = subpath+path
 
             if path.split('#')[0] not in ('index.html'):
                 cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Guide', path))
@@ -39,7 +43,9 @@ def build_api_index(soup, cursor):
 
         if len(name) > 0:
             path = tag.attrs['href'].strip()
-            path = subpath+'/'+path
+            if "://" in path:
+                return
+            path = subpath+path
 
             if path.split('#')[0] not in ('index.html'):
                 cursor.execute('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', (name, 'Module', path))
